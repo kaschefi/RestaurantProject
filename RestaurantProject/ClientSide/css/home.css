@@ -1,0 +1,101 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+body{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "nav"
+                         "header"
+                         "main "
+                         "footer ";
+    background-color: #F9F4EF;                      
+}
+.nav{
+   display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-area: nav;
+    background-color: #8B5E3C;   
+}
+.menuLink{
+    height: 100%;
+    width: 100px;
+}
+.reservationLink{
+    height: 100%;
+    width: 100px;
+}
+.loginLink{
+    height: 100%;
+    width: 100px;
+
+}
+.logo{
+    height: 100%;
+    width: 100px;
+}
+.welcomeContainer {
+  position: relative;
+  display: inline-block;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); 
+  overflow: hidden;
+}
+
+.welcomeImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: brightness(70%); 
+}
+
+.welcomeTxt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: auto , 10em;	
+  text-align: center;
+  font-family: "Parisienne", cursive;
+}
+.reservationContainer{
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+
+}
+.resTxt{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-right: 20px;
+    }
+h2{
+    font-size: 4em;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+}
+p{
+    font-size: 1.5em;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+}
+h3{
+    font-size: 2em;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+}
+.MapDiv{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    margin-left: 50px;      
+    margin-right: 100px;
+}
+footer{
+    background-color: #2c2c2c; 
+    color: white;
+}
