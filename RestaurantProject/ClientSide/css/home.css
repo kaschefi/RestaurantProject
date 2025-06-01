@@ -10,7 +10,7 @@ body{
     grid-template-areas: "nav"
                          "header"
                          "main "
-                         "footer ";
+                         "footer";
     background-color: #F9F4EF;                      
 }
 .nav {
@@ -59,10 +59,8 @@ body{
     width: 100px;
 }
 header{
-    header {
     width: 100%;
     height: 100vh;
-}
 }
 .welcomeContainer {
   width: 100%;
@@ -75,6 +73,7 @@ header{
 
 .welcomeImg {
   display: block;
+  max-width: 100%;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -93,18 +92,28 @@ header{
 }
 .reservationContainer{
     margin-top: 25em;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: space-between;
-    align-items: flex-start;
+}
+.reservationContainer img{
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); 
+    border-radius: 24px;
+}
+.insideImg{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 3rem;
+
 }
 .res-text-box{
     display: flex;
-        flex-direction: column;
+    flex-direction: column;
     justify-content: space-between;
     margin-left: 15px;
     margin-right: 20px;
     width: 100%;
-    height: 100%;   
+    height: 100%;
 }
 .res-text-box > h2{
     margin-top: 0;
@@ -137,38 +146,37 @@ header{
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
  
 }
-
 }
 h2{
-    font-size: 4em;
+    font-size: 2.6em;
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
 }
 p{
-    font-size: 1.5em;
+    font-size: 1.3em;
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
 }
-h3{
-    font-size: 2em;
-    font-family: "Open Sans", sans-serif;
-    font-weight: 400;
-}
+
 .map-time-div{
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 20em;
-    margin-left: 3em;
     margin-bottom: 10em;
+    scale: 0.7;
 }
 .timeContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: space-between;	
    background-color:#F1E3D3;
-   margin-right: 3em;
+   margin-right: 3rem;
    width: 600px;
-   height: 500px;
+   height: 700px;
    padding: 10px;
-   border-radius: 26px;
+   border-radius: 24px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease, scale 0.3s ease;
 }
@@ -177,7 +185,7 @@ h3{
     scale: 1.01;
 }
 iframe{
-    border-radius: 26px;
+    border-radius: 24px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease, scale 0.3s ease;
 }

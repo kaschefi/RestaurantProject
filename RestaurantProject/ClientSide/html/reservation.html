@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reservation.css">
+    <link rel="icon" href="../images/logo_465x320-_1_.ico" type="image/x-icon">
+    <script src="../js/reservation.js" defer></script>
+    <title>Reservation</title>
+</head>
+<body>
+ <nav>
+        <div class="nav">
+            <div class="logo"> 
+                <a href="home.html">
+                    <img src="../images/logo_465x320 (1).jpg" alt="home" class="logo" width="60" height="60">
+                </a>
+            </div>   
+            <div class="navLinks">
+                <div class="menuLink"><a href="menu.html">Menu</a></div>
+                <div class="reservationLink"><a href="reservation.html">Reservation</a></div>
+                <div class="loginLink"><a href="login.html">Login</a></div>
+            </div>      
+        </div>   </nav>
+    <header>
+        <h1>Ready for Schnitzel? 
+            Let’s Reserve Your Spot</h1>
+    </header>
+    <main>
+        <form id="reservation-form">
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required >
+
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="guests">Number of Guests:</label>
+            <input type="number" id="guests" name="guests" min="1" step="1" required>
+
+
+            <button type="submit">Reserve Now</button>
+        </form>
+        <div class="weahterContainer">
+            <h2>Weather Forecast</h2>
+            <div id="weather-info">
+                <!-- Weather information will be displayed here -->
+            </div>
+        
+        </div>
+    </main>
+</body>
+</html>
