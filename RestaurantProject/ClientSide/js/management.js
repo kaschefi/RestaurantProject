@@ -27,7 +27,7 @@ app.use(session({
   cookie: { maxAge: 30 * 60 * 1000 } // Session expires after 30 minutes
 }));
 
-// Mock user database with passwords and roles
+// Mock user database with passwords and roles - must encrypt passwords
 const users = {
   alice: { password: 'pass123', role: 'user' },     // Normal user
   bob: { password: 'admin456', role: 'manager' }   // Manager user
