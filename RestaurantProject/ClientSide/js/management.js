@@ -12,11 +12,11 @@ Session management helps us:
 This way, the website remembers who is logged in and what they’re allowed to do.
 */
 
-const express = require('express'); //Import express framework
-const session = require('express-session'); //Import session middleware
-const bodyParser = require('body-parser'); //Import body-parser middleware, to parse incoming request bodies, so you can easily read form data sent via POST requests. 
+const express = require('express'); // Import express framework
+const session = require('express-session'); // Import session middleware
+const bodyParser = require('body-parser'); // Import body-parser middleware, to parse incoming request bodies, so you can easily read form data sent via POST requests. 
 
-const app = express(); //Tells the Express app to use body-parser to parse URL-encoded form data (like from login forms).
+const app = express(); // Tells the Express app to use body-parser to parse URL-encoded form data (like from login forms).
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Configure session middleware
@@ -39,11 +39,15 @@ app.post('/login', (req, res) => {
   const user = users[username];
 
   if (user && user.password === password) {
-    // Save user info and role in session
     req.session.user = { username, role: user.role };
-    res.send(`Login successful. Role: ${user.role}`);
+    // Redirect based on role
+    if(user.role === 'manager') {
+      res.redirect('/management.html');  // manager dashboard page
+    } else {
+      res.redirect('/menu.html');        // normal user menu page
+    }
   } else {
-    res.status(401).send('Invalid credentials');
+    res.status(401).send('Invalid username or password');
   }
 });
 
@@ -56,21 +60,21 @@ function requireManager(req, res, next) {
   }
 }
 
-// Manager-only page to edit menu
-app.get('/manager/menu-edit', requireManager, (req, res) => {
-  res.send('Menu editing page (managers only)');
+// Serve management.html only if user is manager
+app.get('/management.html', requireManager, (req, res) => {
+  res.sendFile(__dirname + '/public/management.html');
 });
 
 // Public menu browsing page for all users
-app.get('/menu', (req, res) => {
-  res.send('Menu browsing page (all users)');
+app.get('/menu.html', (req, res) => {
+  res.sendFile(__dirname + '/public/menu.html');
 });
 
 // Logout endpoint: destroy the session to log out
 app.post('/logout', (req, res) => {
   req.session.destroy(err => {
-    if (err) return res.status(500).send('Logout failed');
-    res.send('Logged out, session ended');
+    if(err) return res.status(500).send('Logout failed');
+    res.redirect('/home.html');
   });
 });
 
