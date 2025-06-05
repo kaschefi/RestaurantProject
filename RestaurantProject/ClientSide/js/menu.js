@@ -26,11 +26,20 @@ function loadMenu() {
 
     if (xhr.status === 200) {
       const menuItems = JSON.parse(xhr.responseText);
-      for (const item of menuItems) {
-        
-        appenditem(item, mainElement);
-      }
-    } else {
+      for (const category of menuItems) {
+            const categoryElement = document.createElement("section");
+            const categoryTitle = document.createElement("h1");
+            categoryTitle.innerText = category.category;
+            categoryElement.appendChild(categoryTitle);
+            mainElement.appendChild(categoryElement);
+            if (category.items && category.items.length > 0) {
+                for (const item of category.items) {
+                    appenditem(item, categoryElement);
+                }
+            }
+        }
+    }       
+    else {
       mainElement.append(`Daten konnten nicht geladen werden, Status ${xhr.status} - ${xhr.statusText}`);
     }
   }
