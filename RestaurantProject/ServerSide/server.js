@@ -77,7 +77,7 @@ app.post('/api/signup', (req, res) => {
 });
 
 
-// Login route endpoint
+// Login endpoint
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
 
