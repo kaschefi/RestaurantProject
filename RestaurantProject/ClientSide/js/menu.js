@@ -1,49 +1,59 @@
-function appenditem(items, element) {
-  const item = document.createElement("article");
-  const title = document.createElement("h2");
-    title.innerText = items.name;
-    const description = document.createElement("p");
-    description.innerText = items.description;
-    const price = document.createElement("p");
-    price.innerText = `Price: ${items.price}€`;
-    const image = document.createElement("img");    
-    image.src = items.image;
-    image.alt = items.name;
-    item.appendChild(image);
-    item.appendChild(title);
-    item.appendChild(description);
-    item.appendChild(price);
-    element.appendChild(item);  
+const menuContainer = document.querySelector('.menu');
+const filterContainer = document.querySelector('.filter');
+
+let allMenuItems = [];
+
+// Fetch menu items from backend
+fetch('http://localhost:3000/api/menu')
+  .then(res => res.json())
+  .then(data => {
+    allMenuItems = data;
+    renderFilters();
+    renderMenuItems(allMenuItems);
+  })
+  .catch(err => console.error('Error fetching menu:', err));
+
+// Render filter buttons dynamically based on categories
+function renderFilters() {
+  const categories = ['All', ...new Set(allMenuItems.map(item => item.category))];
+
+  categories.forEach(category => {
+    const btn = document.createElement('button');
+    btn.textContent = category;
+    btn.classList.add('filter-btn');
+    btn.addEventListener('click', () => {
+      if (category === 'All') {
+        renderMenuItems(allMenuItems);
+      } else {
+        const filtered = allMenuItems.filter(item => item.category === category);
+        renderMenuItems(filtered);
+      }
+      setActiveButton(btn);
+    });
+    filterContainer.appendChild(btn);
+  });
+  // Set "All" as active initially
+  setActiveButton(filterContainer.querySelector('button'));
 }
-function loadMenu() {
-  const xhr = new XMLHttpRequest();
-  xhr.onload = function () {
-    const mainElement = document.querySelector(".menu");
 
-    while (mainElement.childElementCount > 0) {
-      mainElement.firstChild.remove();
-    }
+// Render menu items into container
+function renderMenuItems(items) {
+  menuContainer.innerHTML = '';
+  items.forEach(item => {
+    const itemDiv = document.createElement('div');
+    itemDiv.classList.add('menu-item');
+    itemDiv.innerHTML = `
+      <h3>${item.name} - $${item.price.toFixed(2)}</h3>
+      <p>${item.description}</p>
+    `;
+    menuContainer.appendChild(itemDiv);
+  });
+}
 
-    if (xhr.status === 200) {
-      const menuItems = JSON.parse(xhr.responseText);
-      for (const category of menuItems) {
-            const categoryElement = document.createElement("section");
-            const categoryTitle = document.createElement("h1");
-            categoryTitle.innerText = category.category;
-            categoryElement.appendChild(categoryTitle);
-            mainElement.appendChild(categoryElement);
-            if (category.items && category.items.length > 0) {
-                for (const item of category.items) {
-                    appenditem(item, categoryElement);
-                }
-            }
-        }
-    }       
-    else {
-      mainElement.append(`Daten konnten nicht geladen werden, Status ${xhr.status} - ${xhr.statusText}`);
-    }
-  }
-
-  xhr.open("GET", "/menu");
-  xhr.send();
+// Highlight the active filter button
+function setActiveButton(activeBtn) {
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  activeBtn.classList.add('active');
 }
