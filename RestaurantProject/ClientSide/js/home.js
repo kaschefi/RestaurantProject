@@ -1,4 +1,4 @@
-//window.addEventListener("scroll", function () {
+window.addEventListener("scroll", function () {
   const nav = document.querySelector(".nav");
   if (window.scrollY > 100) {
     nav.style.width = "60%";
@@ -13,4 +13,4 @@
     nav.style.top = "0";
     nav.style.borderRadius = "0";
   }
-//});
+});
