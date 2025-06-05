@@ -21,7 +21,6 @@ body {
     width: 100%;
     height: auto;
     margin: 0 auto;
-    position: fixed;
     z-index: 1000;
     display: flex;
     justify-content: flex-start;
