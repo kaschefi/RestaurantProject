@@ -85,6 +85,15 @@ app.post('/api/login', (req, res) => {
   res.json({ success: true, role: users[username].role });
 });
 
+app.get('/api/check-auth', (req, res) => {
+  if (req.session.user) {
+    res.json({ loggedIn: true, user: req.session.user });
+  } else {
+    res.json({ loggedIn: false });
+  }
+});
+
+
 // Start the server
 const PORT = 3000;
 app.listen(PORT, () => {
