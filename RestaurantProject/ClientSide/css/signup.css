@@ -5,3 +5,182 @@
     --basic-color: #F1E3D3;
     --background-color: #F9F4EF;
 }
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-family: poppins, sans-serif;
+    font-size: 12pt;
+    color: var(--text-color);
+    text-align: center;
+}
+body{
+    min-height: 100vh;
+    background-image:url(../images/figlmueller-slideshow-schnitzel-3000x2192-1-1300x950.jpg); 
+    background-size: cover;
+    background-position: right;
+    overflow: hidden; 
+}
+
+.nav {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    background-color: #8B5E3C;
+    transition: all 0.2s linear;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.navLinks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 2.5em;
+    width: 100%;
+    height: 100%;
+}
+
+.nav .navLinks a {
+    text-decoration: none;
+    padding-right: 20px;
+    color: #F9F4EF;
+    font-size: 1.5em;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    height: 100%;
+    width: 100px;
+}
+
+.navLinks .navLinks a:hover {
+    color: #3F6B45;
+}
+
+.navLinks a:visited {
+    color: #F9F4EF;
+}
+
+.navLinks a:focus {
+    color: #2f5034;
+}
+
+.logo {
+    height: auto;
+    width: 100px;
+}
+.container{
+    box-sizing: border-box;
+    background-color: var(--background-color);
+    height: 100vh;
+    width: max(40%, 600px);
+    padding: 10px;
+    border-radius: 0 20px 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+form{
+    width: min(400px, 100%);	
+    margin-top: 20px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+form > div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+form label{
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    fill: var(--basic-color);
+    color: var(--basic-color);
+    border-radius: 10px 0 0 10px;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+form input{
+    box-sizing: border-box;
+    flex-grow: 1;
+    min-width: none;
+    height: 50px;
+    padding: 1em;
+    font: inherit;
+    border-radius: 0 10px 10px 0;
+    border: 2px solid var(--basic-color);
+    background-color: var(--basic-color);
+    transition: 150ms ease;
+    border-left: none;
+}
+form input:hover{
+    border-color: var(--primary-color);
+}
+form input:focus{
+    border-color: #3F6B45;
+    outline: none;
+}
+div:has(input:focus) > label{
+    background-color: #3F6B45;
+}
+form button{
+    margin-top: 10px;
+    width: 50%;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: var(--basic-color);
+    font-family: inherit;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 1000px;
+    border: none;
+    cursor: pointer;
+    transition: 150ms ease;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+form button:hover{
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+}
+form button:focus{
+    background-color: #be8e13;
+    outline: none;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
+}
+form div.error label{
+    color: red;
+}
+form div.error input{
+    border-color: red;
+}
+@media (max-width: 1100px) {
+    .container {
+        width: min(600px, 100%);	
+        border-radius: 0;
+    }
+    form {
+        width: 100%;
+    }
+    form button {
+        width: 100%;
+    }
+}
