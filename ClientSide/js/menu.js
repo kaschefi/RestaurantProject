@@ -16,8 +16,8 @@ fetch('http://localhost:3000/api/menu')
 // Render filter buttons dynamically based on categories
 function renderFilters() {
   const categories = ['All', ...new Set(allMenuItems.map(item => item.category))];
-
   categories.forEach(category => {
+
     const btn = document.createElement('button');
     btn.textContent = category;
     btn.classList.add('filter-btn');
@@ -38,8 +38,15 @@ function renderFilters() {
 
 // Render menu items into container
 function renderMenuItems(items) {
+  let lastCategory = '';
   menuContainer.innerHTML = '';
   items.forEach(item => {
+    if (item.category !== lastCategory) {
+      const categoryHeader = document.createElement('h2');
+      categoryHeader.textContent = item.category;
+      menuContainer.appendChild(categoryHeader);
+      lastCategory = item.category;
+    }
     const itemDiv = document.createElement('div');
     itemDiv.classList.add('menu-item');
     itemDiv.innerHTML = `
