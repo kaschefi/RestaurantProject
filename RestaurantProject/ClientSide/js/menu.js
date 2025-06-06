@@ -55,5 +55,6 @@ function setActiveButton(activeBtn) {
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.classList.remove('active');
   });
+  
   activeBtn.classList.add('active');
 }
