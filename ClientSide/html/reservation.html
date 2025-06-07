@@ -28,23 +28,23 @@
             Let’s Reserve Your Spot</h1>
     </header>
     <main>
-        <form id="reservation-form">
+        <form id="reservation-form" action="http://localhost:3000/submit" method="POST">
             <div>
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="date" required >
+                <input type="date" id="date" name="date"  >
 
                 <label for="time">Time:</label>
-                <input type="time" id="time" name="time" required>
+                <input type="time" id="time" name="time" >
             </div>
 
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" >
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" >
 
             <label for="guests">Number of Guests:</label>
-            <input type="number" id="guests" name="guests" min="1" step="1" required>
+            <input type="number" id="guests" name="guests" min="1" step="1" >
 
 
             <button type="submit">Reserve Now</button>

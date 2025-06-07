@@ -3,6 +3,8 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 
+
+
 const app = express();
 
 // CORS middleware: allow frontend origin and credentials
@@ -13,6 +15,7 @@ app.use(cors({
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Session middleware
 app.use(session({
@@ -24,8 +27,8 @@ app.use(session({
 
 // Mock menu data
 const menu = [
-  { id: 1, category: 'Food', name: 'Classic Schnitzel', description: 'Crispy veal schnitzel with lemon', price: 15.99 , image: '../images/foods/schnitzel.jpg'},
-  { id: 2, category: 'Food', name: 'Chicken schnitzel wrap', description: 'Topped with creamy mushroom sauce', price: 17.99 },
+  { id: 1, category: 'Food', name: 'Classic Schnitzel', description: 'Crispy veal schnitzel with lemon', price: 15.99 },
+  { id: 2, category: 'Food', name: 'Schnitzel with Mushroom Sauce', description: 'Topped with creamy mushroom sauce', price: 17.99 },
   { id: 3, category: 'Food', name: 'Vegetarian Schnitzel', description: 'Made with soy and spices', price: 13.99 },
 
   { id: 4, category: 'Salad', name: 'Austrian Potato Salad', description: 'Traditional Austrian potato salad with herbs', price: 5.99 },
@@ -94,9 +97,71 @@ app.get('/api/check-auth', (req, res) => {
   }
 });
 
+// reservation.js
+//const router = express.Router();
+
+// Temporäre Speicherung (In-Memory)
+let reservations = [];
+let nextReservationId = 1;
+
+// POST – Neue Reservierung
+app.post('/submit', (req, res) => {
+  const { date, time, name, email, guests } = req.body;
+
+  const newReservation = {
+    id: nextReservationId++,
+    date,
+    time,
+    name,
+    email,
+    guests
+  };
+
+  reservations.push(newReservation);
+  res.status(201).json(reservations);
+});
+
+// PUT – Reservierung aktualisieren (Für Manager)
+app.put('/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const { date, time, name, email, guests } = req.body;
+
+  const reservation = reservations.find(r => r.id === id);
+  if (!reservation) {
+    return res.status(404).json({ message: 'Reservation not found' });
+  }
+
+  reservation.date = date || reservation.date;
+  reservation.time = time || reservation.time;
+  reservation.name = name || reservation.name;
+  reservation.email = email || reservation.email;
+  reservation.guests = guests || reservation.guests;
+
+  res.json({ message: 'Reservation updated', reservation });
+});
+
+// DELETE – Reservierung löschen
+app.delete('/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = reservations.findIndex(r => r.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ message: 'Reservation not found' });
+  }
+
+  const deleted = reservations.splice(index, 1);
+  res.json({ message: 'Reservation deleted', deleted });
+});
+
+//module.exports = router;
+
+
+
+//app.use('/api/reservations', reservationRoutes);
 
 // Start the server
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
