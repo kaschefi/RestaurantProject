@@ -39,21 +39,39 @@ function renderFilters() {
 // Render menu items into container
 function renderMenuItems(items) {
   let lastCategory = '';
+  let categorySection;
+
   menuContainer.innerHTML = '';
+
   items.forEach(item => {
     if (item.category !== lastCategory) {
       const categoryHeader = document.createElement('h2');
+      categoryHeader.classList.add('menu-category');
       categoryHeader.textContent = item.category;
+
+      // Container for items in this category
+      categorySection = document.createElement('div');
+      categorySection.classList.add('menu-category-items');
+
       menuContainer.appendChild(categoryHeader);
+      menuContainer.appendChild(categorySection);
+
       lastCategory = item.category;
     }
     const itemDiv = document.createElement('div');
     itemDiv.classList.add('menu-item');
     itemDiv.innerHTML = `
-      <h3>${item.name} - $${item.price.toFixed(2)}</h3>
-      <p>${item.description}</p>
+      <div class="menu-item-image-container">
+        <img src="${item.image}" class="menu-item-image">
+      </div>
+      <div class="menu-item-details">
+        <h3>${item.name}</h3>
+        <div>
+          <p>${item.description}</p>
+          <p>${item.price.toFixed(2)} €</p>
+      </div>  
     `;
-    menuContainer.appendChild(itemDiv);
+    categorySection.appendChild(itemDiv);
   });
 }
 

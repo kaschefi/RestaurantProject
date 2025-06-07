@@ -24,8 +24,8 @@ app.use(session({
 
 // Mock menu data
 const menu = [
-  { id: 1, category: 'Food', name: 'Classic Schnitzel', description: 'Crispy veal schnitzel with lemon', price: 15.99 },
-  { id: 2, category: 'Food', name: 'Schnitzel with Mushroom Sauce', description: 'Topped with creamy mushroom sauce', price: 17.99 },
+  { id: 1, category: 'Food', name: 'Classic Schnitzel', description: 'Crispy veal schnitzel with lemon', price: 15.99 , image: '../images/foods/schnitzel.jpg'},
+  { id: 2, category: 'Food', name: 'Chicken schnitzel wrap', description: 'Topped with creamy mushroom sauce', price: 17.99 },
   { id: 3, category: 'Food', name: 'Vegetarian Schnitzel', description: 'Made with soy and spices', price: 13.99 },
 
   { id: 4, category: 'Salad', name: 'Austrian Potato Salad', description: 'Traditional Austrian potato salad with herbs', price: 5.99 },
