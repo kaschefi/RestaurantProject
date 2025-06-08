@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +8,21 @@
     <title>Management page</title>
     <script src="../js/managerpage.js" defer></script>
 </head>
+
 <body>
     <nav>
         <div class="nav">
-            <div class="logo"> 
+            <div class="logo">
                 <a href="home.html">
                     <img src="../images/logo_465x320 (1).jpg" alt="home" class="logo" width="60" height="60">
                 </a>
-            </div>   
+            </div>
             <div class="navLinks">
                 <div class="menuLink"><a href="menu.html">Menu</a></div>
                 <div class="reservationLink"><a href="reservation.html">Reservation</a></div>
                 <div class="loginLink"><a href="login.html">Login</a></div>
                 <div class="signupLink"> <a href="signup.html">Sign up</a></div>
-            </div>      
+            </div>
         </div>
     </nav>
     <header>
@@ -35,18 +37,18 @@
                         <label for="dish-name">Dish Name</label>
                         <input type="text" id="dish-name" name="dish-name" required>
                     </div>
-                  <div>
+                    <div>
                         <label for="dish-price">Price</label>
-                        <input type="number" id="dish-price" name="dish-price" step="0.01" >
-                  </div>
-                  <div>
+                        <input type="number" id="dish-price" name="dish-price" step="0.01">
+                    </div>
+                    <div>
                         <label for="dish-description">Description</label>
                         <textarea id="dish-description" name="dish-description"></textarea>
-                  </div>
-                  <div class="buttons">
+                    </div>
+                    <div class="buttons">
                         <button type="submit">Edit Dish</button>
                         <button type="button" class="delete-dish">Delete Dish</button>
-                  </div>
+                    </div>
 
                 </form>
             </div>
@@ -76,22 +78,18 @@
                     <button type="submit">Update Hours</button>
                 </form>
             </div>
+        </div>
+        <div class="res">
             <div class="reservation-container">
                 <h2>
                     Reservations
                 </h2>
                 <div class="reservation">
-
                 </div>
             </div>
         </div>
+
     </main>
-    <footer>
-            <div>
-                <h3>Contact us</h3>
-                <p>Address: 123 Schnitzel St, Vienna, Austria
-                </p>
-            </div>
-    </footer>
 </body>
+
 </html>

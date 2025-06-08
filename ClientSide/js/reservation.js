@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("reservation-form");
   if (form) {
     form.addEventListener("submit", async (event) => {
-      event.preventDefault(); 
+      event.preventDefault();
       console.log("hi i am working ")
 
       const formData = {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         const response = await fetch('http://localhost:3000/submit', {
           method: 'POST',
-            credentials: 'include',
+          credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
         });
@@ -58,9 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const icon = match.weather[0].icon;
 
             weatherContainer.innerHTML = `
-              <strong>${target}</strong><br>
-              <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="icon"><br>
-              ${desc}, ${temp}°C
+              <div>
+                <strong>${target}</strong><br>
+                <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="icon"><br>  
+                ${desc}, ${temp}°C
+                <p>${suggest(temp, desc)} 
+              </div>  
             `;
           } else {
             weatherContainer.innerHTML = "<p>No weather data for that time.</p>";
@@ -75,4 +78,24 @@ document.addEventListener("DOMContentLoaded", () => {
   // Trigger when either input changes
   dateInput.addEventListener("input", tryFetchWeather);
   timeInput.addEventListener("input", tryFetchWeather);
+  function suggest(temp, desc) {
+    if (desc.toLowerCase().includes("rain")) {
+      return "It's raining cats, dogs, and possibly frogs — outdoor seating has left the chat. Indoors it is!";
+    }
+    if (desc.includes("snow")) {
+      return "Unless you're building a snowman with your meal, stick to indoor";
+    }
+    if (temp < 0) {
+      return "It's literally below zero. Unless you're trying to cosplay as an ice cube, book inside.";
+    }
+    if (temp >= 0 && temp < 10) {
+      return "It's sweater weather, not survival weather. Indoor’s the move.";
+    }
+    if (temp >= 10 && temp < 30) {
+      return "Weather’s on its best behavior today. Indoor? Outdoor? You’re winning either way.";
+    }
+    if (temp >= 30) {
+      return "It's hot bro just stay in.";
+    }
+  }
 });
