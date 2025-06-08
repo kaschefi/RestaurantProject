@@ -10,6 +10,7 @@ const app = express();
 // CORS middleware: allow frontend origin and credentials
 app.use(cors({
   origin: 'http://127.0.0.1:5500',  // your frontend origin (Live Server)
+  credentials: 'include',
   credentials: true
 }));
 

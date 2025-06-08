@@ -4,12 +4,40 @@ document.addEventListener("DOMContentLoaded", () => {
   const city = "Vienna";
   const dateInput = document.getElementById("date");
   const timeInput = document.getElementById("time");
-  const from = document.querySelector(".from");
-    const form = document.querySelector("form"); // or use specific ID like #reservationForm
+  const form = document.getElementById("reservation-form");
   if (form) {
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-    })
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault(); 
+      console.log("hi i am working ")
+
+      const formData = {
+        name: form.name.value,
+        email: form.email.value,
+        date: form.date.value,
+        time: form.time.value,
+        guests: form.guests.value
+      };
+
+      try {
+        const response = await fetch('http://localhost:3000/submit', {
+          method: 'POST',
+            credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Reservation submitted:', data);
+          alert('Reservation submitted!');
+          form.reset(); // optional: clear form
+        } else {
+          console.error('Error:', response.status);
+        }
+      } catch (err) {
+        console.error('Submission failed:', err);
+      }
+    });
   }
   function tryFetchWeather() {
     const date = dateInput.value;
