@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,54 +9,93 @@
     <script src="../js/reservation.js" defer></script>
     <title>Reservation</title>
 </head>
+
 <body>
- <nav>
+    <nav>
         <div class="nav">
-            <div class="logo"> 
+            <div class="logo">
                 <a href="home.html">
                     <img src="../images/logo_465x320 (1).jpg" alt="home" class="logo" width="60" height="60">
                 </a>
-            </div>   
+            </div>
             <div class="navLinks">
                 <div class="menuLink"><a href="menu.html">Menu</a></div>
                 <div class="reservationLink"><a href="reservation.html">Reservation</a></div>
                 <div class="loginLink"><a href="login.html">Login</a></div>
                 <div class="signupLink"> <a href="signup.html">Sign up</a></div>
-            </div>      
-        </div>   </nav>
+            </div>
+        </div>
+    </nav>
     <header>
-        <h1>Ready for Schnitzel? 
+        <h1>Ready for Schnitzel?
             Let’s Reserve Your Spot</h1>
     </header>
     <main>
         <form id="reservation-form">
             <div>
-                <label for="date">Date:</label>
-                <input type="date" id="date" name="date"  >
+                <div class="inputsContainer">
+                    <div class="date-time-container">
+                        <div>
+                            <label for="date">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                    width="24px" fill="#e3e3e3">
+                                    <path
+                                        d="M480-400q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240ZM200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Z" />
+                                </svg>
+                            </label>
+                            <input type="date" id="date" name="date">
+                        </div>
+                        <div>
+                            <label for="time" class="time">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                    width="24px" fill="#e3e3e3">
+                                    <path
+                                        d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q133 0 226.5-93.5T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160Z" />
+                                </svg>
+                            </label>
+                            <input type="time" id="time" name="time">
+                        </div>
 
-                <label for="time">Time:</label>
-                <input type="time" id="time" name="time" >
+                    </div>
+                    <div>
+                        <label for="name">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                                fill="#e3e3e3">
+                                <path
+                                    d="M560-440h200v-80H560v80Zm0-120h200v-80H560v80ZM200-320h320v-22q0-45-44-71.5T360-440q-72 0-116 26.5T200-342v22Zm160-160q33 0 56.5-23.5T440-560q0-33-23.5-56.5T360-640q-33 0-56.5 23.5T280-560q0 33 23.5 56.5T360-480ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Z" />
+                            </svg>
+                        </label>
+                        <input type="text" id="name" name="name" placeholder="Guest name">
+                    </div>
+                    <div>
+                        <label for="email">@</label>
+                        <input type="email" id="email" name="email" placeholder="Email">
+                    </div>
+                    <div>
+                        <label for="guests">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                                fill="#e3e3e3">
+                                <path
+                                    d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z" />
+                            </svg>
+                        </label>
+                        <input type="number" id="guests" name="guests" min="1" step="1" placeholder="Number of guests">
+                    </div>
+
+                </div>
+                <div class="weatherContainer">
+                    <h2>Weather Forecast</h2>
+                    <div id="weather-info">
+                        <!-- Weather information will be displayed here -->
+                    </div>
+                </div>
             </div>
-
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" >
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" >
-
-            <label for="guests">Number of Guests:</label>
-            <input type="number" id="guests" name="guests" min="1" step="1" >
-
-
-            <button type="submit">Reserve Now</button>
+            <div class="submit-btn-container">
+                <button class="submit-btn" type="submit">Reserve Now</button>
+            </div>
         </form>
-        <div class="weahterContainer">
-            <h2>Weather Forecast</h2>
-            <div id="weather-info">
-                <!-- Weather information will be displayed here -->
-            </div>
-        
-        </div>
+
     </main>
 </body>
+
 </html>
