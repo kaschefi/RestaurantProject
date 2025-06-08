@@ -17,6 +17,7 @@ fetch('http://localhost:3000/reservations')
         <p><strong>Date:</strong> ${reservation.date}</p>
         <p><strong>Time:</strong> ${reservation.time}</p>
         <p><strong>Guests:</strong> ${reservation.guests}</p>
+        <p>Indoor</p>
       `;
       reservationsContainer.appendChild(reservationDiv);
     });
