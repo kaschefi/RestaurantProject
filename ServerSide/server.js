@@ -120,6 +120,10 @@ app.post('/submit', (req, res) => {
   reservations.push(newReservation);
   res.status(201).json(reservations);
 });
+// GET – Alle Reservierungen (Für Manager)
+app.get('/reservations', (req, res) => {
+  res.status(200).json(reservations);
+});
 
 // PUT – Reservierung aktualisieren (Für Manager)
 app.put('/:id', (req, res) => {
