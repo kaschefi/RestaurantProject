@@ -37,7 +37,7 @@
                 </label>
                 <input type="text" id="username" name="username" required placeholder="Username">
             </div>
-            <div>
+            <div class="password-container">
                 <label for="password">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                         fill="#e3e3e3">
@@ -46,9 +46,24 @@
                     </svg>
                 </label>
                 <input type="password" id="password" name="password" required placeholder="Password">
+                <span id="togglePassword" class="eye-icon">
+                    
+                    <svg id="eyeClosed" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" >
+                        <path
+                            d="M17.94 17.94A10.96 10.96 0 0 1 12 20C5 20 1 12 1 12a21.73 21.73 0 0 1 5.11-6.11M3 3l18 18" />
+                        <path d="M9.88 9.88A3 3 0 0 0 12 15a3 3 0 0 0 2.12-.88" />
+                    </svg>
+
+                    <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display: none;">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                </span>
             </div>
             <div>
-              <button type="submit">Sign Up</button>
+                <button type="submit">Login</button>
             </div>
         </form>
     </div>
