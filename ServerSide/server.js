@@ -3,8 +3,6 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 
-
-
 const app = express();
 
 // CORS middleware: allow frontend origin and credentials
@@ -48,7 +46,6 @@ const menu = [
   { id: 14, category: 'Dessert', name: 'Sachertorte', description: 'Famous chocolate cake with apricot jam', price: 6.99 },
   { id: 15, category: 'Dessert', name: 'Kaiserschmarrn', description: 'Fluffy shredded pancake with powdered sugar', price: 6.49 }
 ];
-
 // Mock users store (in-memory)
 const users = {
   alice: { password: 'pass123', role: 'user' },

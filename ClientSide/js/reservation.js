@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const weatherContainer = document.getElementById("weather-info");
-  const apiKey = "3580436a12d0fa957788951131e02bcc"; // api key später hinzufügen lol
+  const apiKey = "3580436a12d0fa957788951131e02bcc"; 
   const city = "Vienna";
   const dateInput = document.getElementById("date");
   const timeInput = document.getElementById("time");

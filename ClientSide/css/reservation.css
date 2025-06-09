@@ -82,7 +82,7 @@ h1 {
 
 form {
   width: 100%;
-  height: 100%;
+  height: 700px;
   margin-top: 20px;
   margin-bottom: 50px;
   display: flex;
@@ -164,15 +164,31 @@ form input:focus {
 div:has(input:focus)>label {
   background-color: #3F6B45;
 }
+.weather-visual {
+  position: relative;
+  width: 550px;
+  height: 400px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .weather-video {
   position: absolute;
-  width: 500px;
-  height: 500px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  mix-blend-mode: screen;
+  mix-blend-mode: screen; /* OR lighten, depending on video */
   pointer-events: none;
-  z-index: -1;
-}
+  z-index: 2;
+} 
 /* From Uiverse.io by devestter */ 
 .toggle-button-cover {
   display: table-cell;
@@ -215,7 +231,7 @@ div:has(input:focus)>label {
 .button {
   position: relative;
   top: 50%;
-  width: 90px;
+  width: 180px;
   height: 38px;
   margin: -20px auto 0 auto;
   overflow: hidden;
@@ -239,7 +255,7 @@ div:has(input:focus)>label {
 
 .layer {
   width: 100%;
-  background-color: #524949;
+  background-color: var(--basic-color);
   transition: 1s ease all;
   z-index: 1;
 }
@@ -250,20 +266,20 @@ div:has(input:focus)>label {
 }
 
 #button-3 .knobs:before {
-  content: "IN";
+  content: "Inside";
   position: absolute;
   top: 4px;
   left: 7px;
-  width: 23px;
+  width: 46px;
   height: 11px;
   color: rgb(22, 21, 21);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: bold;
   text-align: center;
   line-height: 1;
   padding: 9px 4px;
   background-color: var(--secondary-color);
-  border-radius: 30%;
+  border-radius: 25%;
   transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
   display: flex;
   align-items: center;
@@ -280,14 +296,14 @@ div:has(input:focus)>label {
 }
 
 #button-3 .checkbox:checked + .knobs:before {
-  content: "OUT";
-  left: 50px;
+  content: "Outside";
+  left: 115px;
   background-color: var(--button-color);
   color: white;
 }
 
 #button-3 .checkbox:checked ~ .layer {
-  background-color: #524949;
+  background-color: var(--basic-color);
 }
 .submit-btn-container{
   display: flex;
