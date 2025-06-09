@@ -53,14 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
           const match = data.list.find(entry => entry.dt_txt.startsWith(`${date}`) && entry.dt_txt.includes(time));
 
           if (match) {
+            const weatherId = data.weather[0].id;
             const desc = match.weather[0].description;
             const temp = match.main.temp.toFixed(1);
-            const icon = match.weather[0].icon;
-
+            //updateWeatherVideoById(weatherId)
             weatherContainer.innerHTML = `
               <div>
                 <strong>${target}</strong><br>
-                <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="icon"><br>  
                 ${desc}, ${temp}°C
                 <p>${suggest(temp, desc)} 
               </div>  
@@ -95,7 +94,29 @@ document.addEventListener("DOMContentLoaded", () => {
       return "Weather’s on its best behavior today. Indoor? Outdoor? You’re winning either way.";
     }
     if (temp >= 30) {
-      return "It's hot bro just stay in.";
+      return "The sidewalk’s cooking harder than your meal — go inside";
     }
+  }
+  function updateWeatherVideoById(id) {
+    const video = document.getElementById('weather-video');
+    const source = document.getElementById('weather-source');
+
+    if (id >= 200 && id < 600) {
+      videoFile = 'rain.mp4';
+    } else if (id >= 600 && id < 700) {
+      videoFile = 'snow.mp4';
+    } else if (id === 800) {
+      videoFile = 'sunny.mp4';
+    } else if (id >= 701 && id <= 804) {
+      videoFile = 'cloud.mp4';
+    }
+
+    if (videoFile) {
+      source.src = videoFile;
+      video.load();
+      video.play();
+    }
+
+
   }
 });
