@@ -5,6 +5,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const dateInput = document.getElementById("date");
   const timeInput = document.getElementById("time");
   const form = document.getElementById("reservation-form");
+
+  function validateDate() {
+    const input = document.getElementById("date");
+    const selectedDate = new Date(input.value);
+    const today = new Date();
+
+    if (selectedDate < today) {
+      alert("Please select a date that is today or later.");
+      input.value = ""; 
+      return false; 
+    }
+
+    return true; 
+  }
+    const today = new Date().toISOString().split("T")[0];
+  document.getElementById("date").setAttribute("min", today);
   if (form) {
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -16,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         date: form.date.value,
         time: form.time.value,
         guests: form.guests.value
-        
+
       };
 
       try {
@@ -59,9 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
             updateWeatherVideoById(weatherId)
             weatherContainer.innerHTML = `
               <div>
-                <strong>${target}</strong><br>
-                ${desc}, ${temp}°C
-                <p>${suggest(temp, desc)} 
+                <p>${desc}, ${temp}°C</p>
+                <p>${suggest(temp, desc)}</p> 
               </div>  
             `;
           } else {
@@ -102,13 +117,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const source = document.getElementById('weather-source');
     let videoFile = '';
     if (id >= 200 && id < 600) {
-      videoFile = '../videos/rain.mp4';
+      videoFile = '../videos/rain3.mp4';
     } else if (id >= 600 && id < 700) {
       videoFile = '../videos/snow.mp4';
     } else if (id === 800) {
-      videoFile = '../videos/sun2.mp4';
+      videoFile = '../videos/sun3.mp4';
     } else if (id >= 701 && id <= 804) {
-      videoFile = '../videos/cloud2.mp4';
+      videoFile = '../videos/cloud3.mp4';
     }
 
     if (videoFile) {
