@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         date: form.date.value,
         time: form.time.value,
         guests: form.guests.value
+        
       };
 
       try {

@@ -10,6 +10,7 @@ fetch('http://localhost:3000/api/menu')
     allMenuItems = data;
     renderFilters();
     renderMenuItems(allMenuItems);
+    
   })
   .catch(err => console.error('Error fetching menu:', err));
 
