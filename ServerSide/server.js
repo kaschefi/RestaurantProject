@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // sessions
 app.use(session({
-  secret: 'hqqSYNhYdNQYUqLo9jSCzwcxtSJ6Y7w7',
+  secret: 'hqqSYNhYdNQYUqLo9jSCzwcxtSJ6Y7w7', //sing the cookie
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 30 * 60 * 1000 }
@@ -57,10 +57,11 @@ const menu = [
 
 // Mock users store (in-memory)
 const users = {
-  alice: { password: 'pass123', role: 'user' },
-  ivan: { password: 'ivan', role: 'user' },
-  bob: { password: 'admin456', role: 'manager' },
-  ron: { password: 'ron', role: 'manager' }
+  ron: { password: 'ron', role: 'manager' },
+  baran: { password: 'baran', role: 'manager' },
+  mohammad: { password: 'mohammad', role: 'manager' },
+  josef: { password: 'josef', role: 'manager' },
+  georg: { password: 'georg', role: 'user' }
 };
 
 // Menu GET endpoint
