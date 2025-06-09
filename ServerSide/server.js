@@ -1,30 +1,27 @@
-
 const express = require('express');
 const session = require('express-session');
-const cors = require('cors');
-
-
-
+const path = require('path');
 const app = express();
 
-// CORS middleware: allow frontend origin and credentials
-app.use(cors({
-  origin: 'http://127.0.0.1:5500',  // your frontend origin (Live Server)
-  credentials: 'include',
-  credentials: true
-}));
-
-// Middleware to parse JSON bodies
+// parse JSON / form bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Session middleware
+// sessions
 app.use(session({
-  secret: 'your-secret-key',       // replace with a strong secret in production
+  secret: 'your-secret-key',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 30 * 60 * 1000 }  // 30 minutes
+  cookie: { maxAge: 30 * 60 * 1000 }
 }));
+
+// ── NEW: serve ClientSide as static ───────────────────────────
+// this makes ClientSide/html/home.html available at http://localhost:3000/html/home.html
+app.use(
+  express.static(
+    path.join(__dirname, '..', 'ClientSide')
+  )
+);
 
 // Mock menu data
 const menu = [
@@ -219,4 +216,3 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
-
