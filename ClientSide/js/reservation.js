@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const weatherContainer = document.getElementById("weather-info");
-  const apiKey = "3580436a12d0fa957788951131e02bcc"; 
+  const apiKey = "8725217ca080ca132ddb5edd08a0d01c"; 
   const city = "Vienna";
   const dateInput = document.getElementById("date");
   const timeInput = document.getElementById("time");
@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const time = timeInput.value;
 
     if (date && time) {
-      // Both fields are filled, now fetch weather
       fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`)
         .then(res => res.json())
         .then(data => {
@@ -53,10 +52,10 @@ document.addEventListener("DOMContentLoaded", () => {
           const match = data.list.find(entry => entry.dt_txt.startsWith(`${date}`) && entry.dt_txt.includes(time));
 
           if (match) {
-            const weatherId = data.weather[0].id;
+            const weatherId = match.weather[0].id;
             const desc = match.weather[0].description;
             const temp = match.main.temp.toFixed(1);
-            //updateWeatherVideoById(weatherId)
+            updateWeatherVideoById(weatherId)
             weatherContainer.innerHTML = `
               <div>
                 <strong>${target}</strong><br>
@@ -100,15 +99,15 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateWeatherVideoById(id) {
     const video = document.getElementById('weather-video');
     const source = document.getElementById('weather-source');
-
+    let videoFile = '';
     if (id >= 200 && id < 600) {
-      videoFile = 'rain.mp4';
+      videoFile = '../videos/rain.mp4';
     } else if (id >= 600 && id < 700) {
-      videoFile = 'snow.mp4';
+      videoFile = '../videos/snow.mp4';
     } else if (id === 800) {
-      videoFile = 'sunny.mp4';
+      videoFile = '../videos/sun2.mp4';
     } else if (id >= 701 && id <= 804) {
-      videoFile = 'cloud.mp4';
+      videoFile = '../videos/cloud2.mp4';
     }
 
     if (videoFile) {
@@ -116,7 +115,5 @@ document.addEventListener("DOMContentLoaded", () => {
       video.load();
       video.play();
     }
-
-
   }
 });

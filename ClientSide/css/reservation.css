@@ -170,8 +170,8 @@ div:has(input:focus)>label {
 }
 .weather-visual {
   position: relative;
-  width: 100%;
-  max-width: 1000px;
+  width: 550px;
+  height: 400px;
   aspect-ratio: 16 / 9; /* Or fixed height */
   overflow: hidden;
 }
@@ -181,6 +181,7 @@ img {
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 28px;
 }
 
 video {
