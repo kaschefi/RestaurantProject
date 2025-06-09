@@ -9,19 +9,28 @@ app.use(express.urlencoded({ extended: true }));
 
 // sessions
 app.use(session({
-  secret: 'your-secret-key',
+  secret: 'hqqSYNhYdNQYUqLo9jSCzwcxtSJ6Y7w7',
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 30 * 60 * 1000 }
 }));
 
-// ── NEW: serve ClientSide as static ───────────────────────────
-// this makes ClientSide/html/home.html available at http://localhost:3000/html/home.html
-app.use(
-  express.static(
-    path.join(__dirname, '..', 'ClientSide')
-  )
-);
+// --- after app.use(session(...)) ---
+
+// simple helper to enforce “only managers”:
+function requireManager(req, res, next) {
+  if (req.session.user && req.session.user.role === 'manager') {
+    return next();
+  }
+  // not a manager? send them back to the menu
+  res.redirect('/html/menu.html');
+}
+
+// Protect just management.html
+app.get('/html/management.html', requireManager, (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'ClientSide', 'html', 'management.html'));
+});
+
 
 // Mock menu data
 const menu = [
@@ -49,7 +58,9 @@ const menu = [
 // Mock users store (in-memory)
 const users = {
   alice: { password: 'pass123', role: 'user' },
-  bob: { password: 'admin456', role: 'manager' }
+  ivan: { password: 'ivan', role: 'user' },
+  bob: { password: 'admin456', role: 'manager' },
+  ron: { password: 'ron', role: 'manager' }
 };
 
 // Menu GET endpoint
@@ -209,7 +220,13 @@ app.put('/api/opening-hours/:day', (req, res) => {
   res.json({ message: 'Opening hours updated', day, hours: openingHours[day] });
 });
 
-
+// ── NEW: serve ClientSide as static ───────────────────────────
+// this makes ClientSide/html/home.html available at http://localhost:3000/html/home.html
+app.use(
+  express.static(
+    path.join(__dirname, '..', 'ClientSide')
+  )
+);
 
 // Start the server
 const PORT = 3000;
