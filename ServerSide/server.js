@@ -3,6 +3,8 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 
+
+
 const app = express();
 
 // CORS middleware: allow frontend origin and credentials
@@ -27,28 +29,29 @@ app.use(session({
 // Mock menu data
 const menu = [
   { id: 1, category: 'Food', name: 'Classic Schnitzel', description: 'Crispy veal schnitzel with lemon', price: 15.99 ,image:"../images/foods/schnitzel.jpg"},
-  { id: 2, category: 'Food', name: 'Schnitzel with Mushroom Sauce', description: 'Topped with creamy mushroom sauce', price: 17.99,image:"../images/foods/Schnitzel mit mushrooms.jpeg"},
-  { id: 3, category: 'Food', name: 'Vegetarian Schnitzel', description: 'Made with soy and spices', price: 13.99,image:"../images/foods/Vegetarian Schnitzel.jpeg" },
+  { id: 2, category: 'Food', name: 'Schnitzel with Mushroom Sauce', description: 'Topped with creamy mushroom sauce', price: 17.99 },
+  { id: 3, category: 'Food', name: 'Vegetarian Schnitzel', description: 'Made with soy and spices', price: 13.99 },
 
-  { id: 4, category: 'Salad', name: 'Austrian Potato Salad', description: 'Traditional Austrian potato salad with herbs', price: 5.99,image:"../images/foods/Kartoffelsalat.jpg" },
-  { id: 5, category: 'Salad', name: 'Mixed Green Salad', description: 'Fresh greens with house dressing', price: 6.99,image:"../images/foods/Mixed green salad.jpg" },
-  { id: 6, category: 'Salad', name: 'Caesar Salad', description: 'Romaine lettuce with Caesar dressing and croutons', price: 7.99,image:"../images/foods/caeser salad.jpg" },
+  { id: 4, category: 'Salad', name: 'Austrian Potato Salad', description: 'Traditional Austrian potato salad with herbs', price: 5.99 },
+  { id: 5, category: 'Salad', name: 'Mixed Green Salad', description: 'Fresh greens with house dressing', price: 6.99 },
+  { id: 6, category: 'Salad', name: 'Caesar Salad', description: 'Romaine lettuce with Caesar dressing and croutons', price: 7.99 },
 
-  { id: 7, category: 'Soup', name: 'Goulash Soup', description: 'Rich beef stew soup with paprika', price: 7.99,image:"../images/foods/goulash-soup.jpeg" },
-  { id: 8, category: 'Soup', name: 'Creamy Mushroom Soup', description: 'Smooth mushroom soup with fresh herbs', price: 6.99,image:"../images/foods/creamy mushroom soup.jpg" },
-  { id: 9, category: 'Soup', name: 'Chicken Noodle Soup', description: 'Classic chicken soup with noodles and vegetables', price: 7.49,image:"../images/foods/chickennoodlesoup.jpg" },
+  { id: 7, category: 'Soup', name: 'Goulash Soup', description: 'Rich beef stew soup with paprika', price: 7.99 },
+  { id: 8, category: 'Soup', name: 'Creamy Mushroom Soup', description: 'Smooth mushroom soup with fresh herbs', price: 6.99 },
+  { id: 9, category: 'Soup', name: 'Chicken Noodle Soup', description: 'Classic chicken soup with noodles and vegetables', price: 7.49 },
 
-  { id: 10, category: 'Drink', name: 'Austrian White Wine', description: 'Glass of local Grüner Veltliner', price: 8.50,image:"../images/foods/wine.jpg" },
-  { id: 11, category: 'Drink', name: 'Apple Spritzer', description: 'Refreshing apple juice with sparkling water', price: 4.50,image:"../images/foods/Ginger_apple_spritzer.webp" },
-  { id: 12, category: 'Drink', name: 'Viennese Coffee', description: 'Traditional coffee with whipped cream', price: 3.99,image:"../images/foods/coffee.jpg" },
+  { id: 10, category: 'Drink', name: 'Austrian White Wine', description: 'Glass of local Grüner Veltliner', price: 8.50 },
+  { id: 11, category: 'Drink', name: 'Apple Spritzer', description: 'Refreshing apple juice with sparkling water', price: 4.50 },
+  { id: 12, category: 'Drink', name: 'Viennese Coffee', description: 'Traditional coffee with whipped cream', price: 3.99 },
 
-  { id: 13, category: 'Dessert', name: 'Apple Strudel', description: 'Traditional Austrian apple pastry', price: 5.99,image:"../images/foods/apfelstrudel.jpg" },
-  { id: 14, category: 'Dessert', name: 'Sachertorte', description: 'Famous chocolate cake with apricot jam', price: 6.99,image:"../images/foods/sachertorte.jpg" },
-  { id: 15, category: 'Dessert', name: 'Kaiserschmarrn', description: 'Fluffy shredded pancake with powdered sugar', price: 6.49,image:"../images/foods/kaiserschmarrn.jpg" }
+  { id: 13, category: 'Dessert', name: 'Apple Strudel', description: 'Traditional Austrian apple pastry', price: 5.99 },
+  { id: 14, category: 'Dessert', name: 'Sachertorte', description: 'Famous chocolate cake with apricot jam', price: 6.99 },
+  { id: 15, category: 'Dessert', name: 'Kaiserschmarrn', description: 'Fluffy shredded pancake with powdered sugar', price: 6.49 }
 ];
+
 // Mock users store (in-memory)
 const users = {
-  alice: { password: 'pass123', role: 'user'  },
+  alice: { password: 'pass123', role: 'user' },
   bob: { password: 'admin456', role: 'manager' }
 };
 
@@ -123,43 +126,93 @@ app.get('/reservations', (req, res) => {
   res.status(200).json(reservations);
 });
 
-// PUT – Reservierung aktualisieren (Für Manager)
-app.put('/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const { date, time, name, email, guests } = req.body;
+// PUT - Gericht bearbeiten
+app.put('/api/menu/update', (req, res) => {
+  const { name, price, description } = req.body;
 
-  const reservation = reservations.find(r => r.id === id);
-  if (!reservation) {
-    return res.status(404).json({ message: 'Reservation not found' });
+  const dish = menu.find(d => d.name.toLowerCase() === name.toLowerCase());
+  if (!dish) {
+    return res.status(404).json({ message: 'Dish not found' });
   }
 
-  reservation.date = date || reservation.date;
-  reservation.time = time || reservation.time;
-  reservation.name = name || reservation.name;
-  reservation.email = email || reservation.email;
-  reservation.guests = guests || reservation.guests;
+  if (price !== undefined) dish.price = parseFloat(price);
+  if (description !== undefined) dish.description = description;
 
-  res.json({ message: 'Reservation updated', reservation });
+  res.json({ message: 'Dish updated', dish });
 });
 
-// DELETE – Reservierung löschen
-app.delete('/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = reservations.findIndex(r => r.id === id);
 
+// DELETE – Gericht löschen
+app.delete('/api/menu/delete', (req, res) => {
+  const { name } = req.body;
+
+  const index = menu.findIndex(d => d.name.toLowerCase() === name.toLowerCase());
   if (index === -1) {
-    return res.status(404).json({ message: 'Reservation not found' });
+    return res.status(404).json({ message: 'Dish not found' });
   }
 
-  const deleted = reservations.splice(index, 1);
-  res.json({ message: 'Reservation deleted', deleted });
+  const deleted = menu.splice(index, 1);
+  res.json({ message: 'Dish deleted', deleted });
 });
 
-//module.exports = router;
+// GET-Endpoint für Vorschläge Autofill
+app.get('/api/menu/names', (req, res) => {
+  const names = menu.map(d => d.name);
+  res.json(names);
+});
+
+// GET – Einzelnes Gericht mit allen Details (per Name)
+app.get('/api/menu/details', (req, res) => {
+  const { name } = req.query;
+  const dish = menu.find(d => d.name.toLowerCase() === name.toLowerCase());
+
+  if (!dish) {
+    return res.status(404).json({ message: 'Dish not found' });
+  }
+
+  res.json(dish);
+});
 
 
+// Memory Öffnungszeiten (Keine Database)
+let openingHours = {
+  monday:     { open: "08:00", close: "18:00" },
+  tuesday:    { open: "08:00", close: "18:00" },
+  wednesday:  { open: "08:00", close: "18:00" },
+  thursday:   { open: "08:00", close: "18:00" },
+  friday:     { open: "08:00", close: "20:00" },
+  saturday:   { open: "10:00", close: "22:00" },
+  sunday:     { open: "10:00", close: "16:00" }
+};
 
-//app.use('/api/reservations', reservationRoutes);
+app.get('/api/opening-hours/:day', (req, res) => {
+  const day = req.params.day.toLowerCase();
+  const hours = openingHours[day];
+  
+  if (!hours) {
+    return res.status(404).json({ message: 'Day not found' });
+  }
+
+  res.json(hours);
+});
+
+app.put('/api/opening-hours/:day', (req, res) => {
+  const day = req.params.day.toLowerCase();
+  const { open, close } = req.body;
+
+  if (!openingHours[day]) {
+    return res.status(404).json({ message: 'Day not found' });
+  }
+
+  if (!open || !close) {
+    return res.status(400).json({ message: 'Missing opening or closing time' });
+  }
+
+  openingHours[day] = { open, close };
+  res.json({ message: 'Opening hours updated', day, hours: openingHours[day] });
+});
+
+
 
 // Start the server
 const PORT = 3000;

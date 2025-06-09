@@ -160,17 +160,22 @@ form input:focus {
   border-color: #3F6B45;
   outline: none;
 }
-
+.inout-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 div:has(input:focus)>label {
   background-color: #3F6B45;
 }
 .weather-visual {
   position: relative;
-  width: 550px;
-  height: 400px;
-  aspect-ratio: 16 / 9;
+  width: 100%;
+  max-width: 1000px;
+  aspect-ratio: 16 / 9; /* Or fixed height */
   overflow: hidden;
 }
+
 img {
   width: 100%;
   height: 100%;
@@ -178,7 +183,7 @@ img {
   display: block;
 }
 
-.weather-video {
+video {
   position: absolute;
   top: 0;
   left: 0;
@@ -188,7 +193,7 @@ img {
   mix-blend-mode: screen; /* OR lighten, depending on video */
   pointer-events: none;
   z-index: 2;
-} 
+}
 /* From Uiverse.io by devestter */ 
 .toggle-button-cover {
   display: table-cell;
