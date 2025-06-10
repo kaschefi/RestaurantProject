@@ -1,3 +1,15 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const jokeContainer = document.querySelector(".joke-container")
+  fetch('https://v2.jokeapi.dev/joke/Any?type=twopart&safe-mode')
+    .then(res => res.json())
+    .then(data => {
+      jokeContainer.innerHTML=`
+      <h3>${data.setup}  ${data.delivery}</h3>`
+    })
+    .catch(err => console.error('Error fetching menu:', err));
+
+})
+
 fetch('http://localhost:3000/reservations')  
   .then(response => {
     if (!response.ok) {

@@ -17,7 +17,6 @@ body {
     display: grid;
     background-color: var(--background-color);
 }
-
 .nav {
     width: 100%;
     height: auto;
@@ -68,6 +67,28 @@ body {
     height: auto;
     width: 100px;
 }
+header h1{
+    font-family: inherit;
+    font-size: 3rem;
+    padding-top: 10px;
+    padding-left: 10px;
+    color: var(--text-color);
+}
+header h2{
+    font-family: inherit;
+    font-size: 2rem;
+    padding-top: 10px;
+    padding-left: 10px;
+    color: var(--text-color);
+}
+header h3{
+    font-family: inherit;
+    font-size: 1.5rem;
+    padding-top: 5px;
+    padding-left: 10px;
+    color: var(--text-color);
+}
+
 main{
 display:flex;
 flex-direction: column;
@@ -367,7 +388,9 @@ form button:focus{
         display: flex;
         flex-direction: column;
     }
-    
+    .management-container > div{
+        width: 80%;
+    }
   .reservation {
     max-width: 90%;
     padding: 1rem;
