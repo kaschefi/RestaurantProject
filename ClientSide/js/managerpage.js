@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const jokeContainer = document.querySelector(".joke-container")
-  fetch('https://v2.jokeapi.dev/joke/Any?type=twopart&safe-mode')
+  fetch('https://v2.jokeapi.dev/joke/Programming?type=twopart&safe-mode')
     .then(res => res.json())
     .then(data => {
       jokeContainer.innerHTML=`
