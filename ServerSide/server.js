@@ -220,7 +220,9 @@ app.put('/api/opening-hours/:day', (req, res) => {
   openingHours[day] = { open, close };
   res.json({ message: 'Opening hours updated', day, hours: openingHours[day] });
 });
-
+app.get('/api/openingHours', (req,res) =>{
+  res.json(openingHours)
+})
 // ── NEW: serve ClientSide as static ───────────────────────────
 // this makes ClientSide/html/home.html available at http://localhost:3000/html/home.html
 app.use(

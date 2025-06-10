@@ -2,6 +2,7 @@ const menuContainer = document.querySelector('.carousel');
 document.querySelector('.left').addEventListener('click', scrollLeft);
 document.querySelector('.right').addEventListener('click', scrollRight);
 let allMenuItems = [];
+let openHours = [];
 
 // Fetch menu items from backend
 fetch('http://localhost:3000/api/menu')
@@ -42,5 +43,26 @@ function renderMenu(items){
         `;
         menuContainer.appendChild(itemDiv);
     }
+  });
+}
+fetch('http://localhost:3000/api/openingHours')
+  .then(res => res.json())
+  .then(data => {
+    openHours = data;
+    renderOpeningHours(openHours);
+  })
+  .catch(err => console.error('Error fetching menu:', err));
+
+function renderOpeningHours(openHours) {
+  const timeContainer = document.querySelector(".timeContainer");
+  timeContainer.innerHTML = '';
+  
+  Object.entries(openHours).forEach(([day, hours]) => {
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <p>${day}</p>
+      <p>${hours.open} - ${hours.close}</p>
+    `;
+    timeContainer.appendChild(div);
   });
 }
