@@ -13,7 +13,6 @@ body {
     width: 100%;
     font-family: "Open Sans", sans-serif;
 }
-
 body {
     display: grid;
     background-color: var(--background-color);
@@ -69,6 +68,10 @@ body {
     height: auto;
     width: 100px;
 }
+main{
+display:flex;
+flex-direction: column;
+}
 .management-container {
     display: flex;
     align-items: center;
@@ -101,14 +104,15 @@ body {
 .res{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     height: 100%;
     gap: 2rem;
+    margin-top: 2rem;
 }
 .reservation-container{
     background-color: var(--basic-color);
-    width: 100%;
+    width: 80%;
     min-height: 600px;
     display: grid;
     grid-template-rows: 1fr 7fr;
@@ -131,7 +135,7 @@ body {
 }
 
 form{
-    width: min(400px, 100%);	
+    width: 100%;
     margin-top: 20px;
     margin-bottom: 40px;
     display: flex;
@@ -141,7 +145,7 @@ form{
     gap: 10px;
 }
 form > div{
-    width: 95%;
+    width: 80%;
     display: flex;
     justify-content: center;
 }
@@ -172,6 +176,19 @@ form input{
     transition: 150ms ease;
     border-left: none;
 }
+select{
+    box-sizing: border-box;
+    flex-grow: 1;
+    min-width: none;
+    height: 50px;
+    font: inherit;
+    border-radius: 0 10px 10px 0;
+    border: 2px solid var(--background-color);
+    background-color: var(--background-color);
+    transition: 150ms ease;
+    border-left: none;
+    color: var(--text-color);
+}
 form textarea{
     box-sizing: border-box;
     flex-grow: 1;
@@ -184,6 +201,13 @@ form textarea{
     background-color: var(--background-color);
     transition: 150ms ease;
     border-left: none;
+}
+form select:hover{
+    border-color: var(--primary-color);
+}
+form select:focus{
+    border-color: #3F6B45;
+    outline: none;
 }
 form textarea:hover{
     border-color: var(--primary-color);
@@ -199,6 +223,9 @@ form input:focus{
     border-color: #3F6B45;
     outline: none;
 }
+div:has(select:focus) > label{
+    background-color: #3F6B45;
+}
 div:has(textarea:focus) > label{
     background-color: #3F6B45;
 }
@@ -209,11 +236,10 @@ div:has(input:focus) > label{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
 }
 form button{
     margin-top: 10px;
-    width: 40%;
+    width: 30%;
     height: 50px;
     background-color: var(--primary-color);
     color: var(--basic-color);
@@ -259,12 +285,12 @@ form button:focus{
   transition: box-shadow 0.2s;
   line-height: 2;
   display: flex;
-  flex-direction: row;     /* <-- Die Felder nebeneinander */
+  flex-direction: row; 
   align-items: center;
-  gap: 2rem;               /* Abstand zwischen Feldern */
+  gap: 2rem;               
   margin: 0 auto;
   justify-content: flex-start;
-  flex-wrap: wrap;         /* Falls es zu schmal wird, bricht es um */
+  flex-wrap: wrap;       
 }
 .reservation p {
   margin: 0;
@@ -278,6 +304,63 @@ form button:focus{
   min-width: 4rem;
   margin-right: .3rem;
 }
+
+.footer {
+  background-color: #222;
+  color: #fff;
+  padding: 40px 0;
+  font-family: Arial, sans-serif;
+  bottom: 0;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+.footer-section {
+  flex: 1 1 200px;
+  margin: 20px;
+}
+
+.footer-section h2 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.footer-section p,
+.footer-section a {
+  color: #ccc;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section li {
+  margin-bottom: 10px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 20px;
+  background-color: #111;
+  font-size: 14px;
+}
+
+
 @media (max-width: 900px) {
   .reservation {
     max-width: 100%;
