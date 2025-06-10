@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         date: form.date.value,
         time: form.time.value,
         guests: form.guests.value,
-        side: form.document.getElementById('checkbox').checked
+        side: form.checkbox.checked
       };
 
       try {
