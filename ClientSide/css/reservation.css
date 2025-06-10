@@ -171,12 +171,18 @@ form input:focus {
 div:has(input:focus)>label {
   background-color: #3F6B45;
 }
+.suggestion{
+  display: flex;
+  justify-content: space-between;
+}
 .inout-container{
+  padding-left: 10px;
   width: 50rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
+
 .weather-info div{
   display: flex;
   flex-direction: column;

@@ -7,32 +7,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("reservation-form");
   const img = document.querySelector(".background-img");
   img.src = "../images/1.png"
-  function validateDate() {
-    const input = document.getElementById("date");
-    const selectedDate = new Date(input.value);
-    const today = new Date();
 
-    if (selectedDate < today) {
-      alert("Please select a date that is today or later.");
-      input.value = "";
-      return false;
-    }
-
-    return true;
-  }
+  const today = new Date();
+  const todayDate = new Date().toISOString().split("T")[0];
   document.getElementById("date").setAttribute("min", today);
   if (form) {
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       console.log("hi i am working ")
-
+      
       const formData = {
         name: form.name.value,
         email: form.email.value,
         date: form.date.value,
         time: form.time.value,
         guests: form.guests.value,
-        side: form.checkbox.checked
+        side: form.document.getElementById('checkbox').checked
       };
 
       try {
@@ -61,12 +51,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const time = timeInput.value;
 
     if (date && time) {
+          const roundedHour24 = apiTimeFormat(time);
+          const formattedRoundedHour = String(roundedHour24).padStart(2, '0');
       fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`)
         .then(res => res.json())
         .then(data => {
           // Find closest matching date-time
-          const target = `${date} ${time}:00`;
-          const match = data.list.find(entry => entry.dt_txt.startsWith(`${date}`) && entry.dt_txt.includes(time));
+
+          const match = data.list.find(entry =>
+            entry.dt_txt.startsWith(`${date}`) && 
+            entry.dt_txt.substring(11, 13) === formattedRoundedHour 
+          );
 
           if (match) {
             const weatherId = match.weather[0].id;
@@ -81,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
               </div>  
             `;
           } else {
-            weatherContainer.innerHTML = "<p>No weather data for that time.</p>";
+            weatherContainer.innerHTML = "<div><p>Oops!<br> My crystal ball for weather only goes 5 days into the future.<br> But hey,<strong> you can still book your table!</strong><br> Just decide if you're feeling lucky with an outdoor spot, or if the cozy indoors is calling your name</p></div>";
           }
         })
         .catch(err => {
@@ -157,5 +152,21 @@ document.addEventListener("DOMContentLoaded", () => {
       img.src = "../images/1.png"
       return false
     }
+  }
+  function apiTimeFormat(timeString) {
+    // This function converts user's "H:MM AM/PM" to a rounded 24-hour integer (0, 3, 6, ..., 21)
+    const parts = timeString.split(' ');
+    const timePart = parts[0];
+    const ampm = parts[1] ? parts[1].toUpperCase() : '';
+
+    let hour24 = parseInt(timePart.split(':')[0], 10);
+
+    if (ampm === 'PM' && hour24 !== 12) {
+      hour24 += 12;
+    } else if (ampm === 'AM' && hour24 === 12) {
+      hour24 = 0;
+    }
+
+    return hour24 - (hour24 % 3);
   }
 });
