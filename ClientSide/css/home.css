@@ -380,6 +380,7 @@ iframe:hover {
 }
 
 .footer-section h2 {
+  color: #D4A017;
   margin-bottom: 15px;
   font-size: 18px;
 }
@@ -411,8 +412,6 @@ iframe:hover {
   background-color: #111;
   font-size: 14px;
 }
-
-
 @media (max-width: 1000px) {
     .welcomeImg {
         display: block;

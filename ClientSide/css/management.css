@@ -327,9 +327,10 @@ form button:focus{
   margin: 20px;
 }
 
-.footer-section h2 {
+.footer-section h2 {  
   margin-bottom: 15px;
   font-size: 18px;
+  color: var(--secondary-color);
 }
 
 .footer-section p,
@@ -362,8 +363,13 @@ form button:focus{
 
 
 @media (max-width: 900px) {
+    .management-container{
+        display: flex;
+        flex-direction: column;
+    }
+    
   .reservation {
-    max-width: 100%;
+    max-width: 90%;
     padding: 1rem;
     font-size: 1rem;
     flex-wrap: wrap;
