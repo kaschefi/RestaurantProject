@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
       <h3>${data.setup}  ${data.delivery}</h3>`
     })
     .catch(err => console.error('Error fetching menu:', err));
-
 })
 
 fetch('http://localhost:3000/reservations')  

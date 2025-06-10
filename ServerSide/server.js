@@ -116,7 +116,7 @@ let nextReservationId = 1;
 
 // POST – Neue Reservierung
 app.post('/submit', (req, res) => {
-  const { date, time, name, email, guests } = req.body;
+  const { date, time, name, email, guests,side } = req.body;
 
   const newReservation = {
     id: nextReservationId++,
