@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
   const weatherContainer = document.getElementById("weather-info");
-  const apiKey = "8725217ca080ca132ddb5edd08a0d01c"; 
+  const apiKey = "8725217ca080ca132ddb5edd08a0d01c";
   const city = "Vienna";
   const dateInput = document.getElementById("date");
   const timeInput = document.getElementById("time");
   const form = document.getElementById("reservation-form");
-
+  const img = document.querySelector(".background-img");
+  img.src = "../images/1.png"
   function validateDate() {
     const input = document.getElementById("date");
     const selectedDate = new Date(input.value);
@@ -13,13 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (selectedDate < today) {
       alert("Please select a date that is today or later.");
-      input.value = ""; 
-      return false; 
+      input.value = "";
+      return false;
     }
 
-    return true; 
+    return true;
   }
-    const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toISOString().split("T")[0];
   document.getElementById("date").setAttribute("min", today);
   if (form) {
     form.addEventListener("submit", async (event) => {
@@ -72,7 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const weatherId = match.weather[0].id;
             const desc = match.weather[0].description;
             const temp = match.main.temp.toFixed(1);
-            updateWeatherVideoById(weatherId)
+            let isNight = updateWeatherImg(time)
+            updateWeatherVideoById(weatherId, isNight)
             weatherContainer.innerHTML = `
               <div>
                 <p>${desc}, ${temp}°C</p>
@@ -112,17 +114,21 @@ document.addEventListener("DOMContentLoaded", () => {
       return "The sidewalk’s cooking harder than your meal — go inside";
     }
   }
-  function updateWeatherVideoById(id) {
+  function updateWeatherVideoById(id, isNight) {
     const video = document.getElementById('weather-video');
     const source = document.getElementById('weather-source');
     let videoFile = '';
+
     if (id >= 200 && id < 600) {
       videoFile = '../videos/rain3.mp4';
     } else if (id >= 600 && id < 700) {
       videoFile = '../videos/snow.mp4';
-    } else if (id === 800) {
+    } else if (id === 800 && isNight) {
+      videoFile = '../videos/moon0.mp4';
+    } else if (id === 800 && !isNight) {
       videoFile = '../videos/sun3.mp4';
-    } else if (id >= 701 && id <= 804) {
+    }
+    else if (id >= 701 && id <= 804) {
       videoFile = '../videos/cloud3.mp4';
     }
 
@@ -130,6 +136,27 @@ document.addEventListener("DOMContentLoaded", () => {
       source.src = videoFile;
       video.load();
       video.play();
+    }
+  }
+  function updateWeatherImg(timeString) {
+    const parts = timeString.split(' ');
+    const timePart = parts[0];
+    const ampm = parts[1] ? parts[1].toUpperCase() : '';
+    let hour = parseInt(timePart.split(':')[0], 10);
+
+    // Convert to 24-hour format
+    if (ampm === 'PM' && hour !== 12) {
+      hour += 12;
+    } else if (ampm === 'AM' && hour === 12) {
+      hour = 0;
+    }
+    img.src = ""
+    if (hour >= 20 || hour <= 8) {
+      img.src = "../images/3.png"
+      return true
+    } else {
+      img.src = "../images/1.png"
+      return false
     }
   }
 });
