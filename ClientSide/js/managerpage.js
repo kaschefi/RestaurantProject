@@ -24,12 +24,18 @@ fetch('http://localhost:3000/reservations')
     data.forEach(reservation => {
       const reservationDiv = document.createElement('div');
       reservationDiv.className = 'reservation';
+      let sideHolder
+      if(reservation.side){
+        sideHolder = "Inside" 
+      }else{
+        sideHolder = "Outside"
+      }
       reservationDiv.innerHTML = `
         <p><strong>Name:</strong> ${reservation.name}</p>
         <p><strong>Date:</strong> ${reservation.date}</p>
         <p><strong>Time:</strong> ${reservation.time}</p>
         <p><strong>Guests:</strong> ${reservation.guests}</p>
-        <p>Indoor</p>
+        <p>${sideHolder}</p>
       `;
       reservationsContainer.appendChild(reservationDiv);
     });
@@ -53,8 +59,6 @@ fetch('http://localhost:3000/reservations')
         dishNameInput.setAttribute("list", "dish-list");
         datalist.innerHTML = names.map(name => `<option value="${name}">`).join("");
         document.body.appendChild(datalist);
-
-
       });
   });
 

@@ -124,7 +124,8 @@ app.post('/submit', (req, res) => {
     time,
     name,
     email,
-    guests
+    guests,
+    side
   };
 
   reservations.push(newReservation);
@@ -149,7 +150,6 @@ app.put('/api/menu/update', (req, res) => {
 
   res.json({ message: 'Dish updated', dish });
 });
-
 
 // DELETE – Gericht löschen
 app.delete('/api/menu/delete', (req, res) => {

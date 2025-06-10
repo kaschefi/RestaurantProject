@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     return true;
   }
-  const today = new Date().toISOString().split("T")[0];
   document.getElementById("date").setAttribute("min", today);
   if (form) {
     form.addEventListener("submit", async (event) => {
@@ -32,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
         email: form.email.value,
         date: form.date.value,
         time: form.time.value,
-        guests: form.guests.value
-
+        guests: form.guests.value,
+        side: form.checkbox.checked
       };
 
       try {
