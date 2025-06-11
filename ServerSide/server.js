@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // sessions
 app.use(session({
-  secret: 'hqqSYNhYdNQYUqLo9jSCzwcxtSJ6Y7w7', //sing the cookie
+  secret: 'hqqSYNhYdNQYUqLo9jSCzwcxtSJ6Y7w7', //sign the cookie
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 30 * 60 * 1000 }
